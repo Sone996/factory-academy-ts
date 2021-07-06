@@ -1,20 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <img alt="Vue logo" src="./assets/logo.png" />
+	<div class="username">User: {{ name }}</div>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import { Component, Vue } from "vue-property-decorator";
+import { namespace } from "vuex-class";
+const user = namespace("globalModule");
+import HelloWorld from "./components/HelloWorld.vue";
 
 @Component({
   components: {
     HelloWorld,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  @user.State
+  public name!: string;
+}
 </script>
 
 <style>
