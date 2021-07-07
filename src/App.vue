@@ -1,10 +1,16 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-	<div class="username">User: {{ name }}</div>
-  <router-view />
-    <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
-  </div>
+  <div id="app" class="relative w-screen h-screen overflow-hidden flex">
+		<!-- <loader v-if="toggleLoader"></loader> -->
+		<router-view />
+		<!-- modals -->
+		<!-- <span class="button bg-green" @click="openNotificationModal()">test</span> -->
+		<!-- <div v-if="showModal" class="fixed top-0 left-0 h-screen w-screen flex" style="z-index: 2">
+    		<div class="modal flex items-center justify-center w-full">
+    			<component :is="getModalObj.name" :model="getModalObj.data" @closeModal="closeModal" />
+    		</div>
+    		<div v-if="activeOverlay" class="fixed top-0 left-0 modal-overlay h-screen w-screen flex"></div>
+    	</div> -->
+	</div>
 </template>
 
 <script lang="ts">
