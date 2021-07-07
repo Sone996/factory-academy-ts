@@ -15,8 +15,6 @@ Object.keys(globaComponents.components).forEach((key: string) => {
 	Vue.component(key, globaComponents.components.vSelect);
 });
 
-//Vue.component(vSelect, vSelect);
-
 new Vue({
 	store,
 	router,

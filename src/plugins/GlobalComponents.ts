@@ -1,9 +1,9 @@
 import vSelect from 'vue-select';
-//import Scroll from '../components/shared/Scroll';
+import Scroll from '../components/shared/Scroll.vue';
 
 const components = {
     vSelect,
-    //Scroll,
+    Scroll,
 };
 
 export default {
