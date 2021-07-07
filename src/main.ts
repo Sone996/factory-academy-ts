@@ -5,6 +5,7 @@ import router from './router'
 import './assets/scss/tailwind.css'
 import 'vue-select/dist/vue-select.css';
 import globaComponents from './plugins/GlobalComponents';
+import './assets/scss/main.scss'
 
 Vue.config.productionTip = false
 
