@@ -1,32 +1,39 @@
 <template>
   <div id="app" class="relative w-screen h-screen overflow-hidden flex">
-		<!-- <loader v-if="toggleLoader"></loader> -->
+		<Loader v-if="loader"></Loader>
 		<router-view />
 		<!-- modals -->
 		<!-- <span class="button bg-green" @click="openNotificationModal()">test</span> -->
+
 		<!-- <div v-if="showModal" class="fixed top-0 left-0 h-screen w-screen flex" style="z-index: 2">
-    		<div class="modal flex items-center justify-center w-full">
-    			<component :is="getModalObj.name" :model="getModalObj.data" @closeModal="closeModal" />
-    		</div>
+    			<div class="modal flex items-center justify-center w-full">
+    				<component :is="getModalObj.name" :model="getModalObj.data" @closeModal="closeModal" />
+    			</div>
     		<div v-if="activeOverlay" class="fixed top-0 left-0 modal-overlay h-screen w-screen flex"></div>
     	</div> -->
+
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+// modules
 import { namespace } from "vuex-class";
-const user = namespace("globalModule");
-import HelloWorld from "./components/HelloWorld.vue";
+const global = namespace("globalModule");
+// components
+import Loader from "./components/shared/Loader.vue";
+// import HelloWorld from "./components/HelloWorld.vue";
 
 @Component({
   components: {
-    HelloWorld,
+	Loader,
   },
 })
 export default class App extends Vue {
-  @user.State
+  @global.State
   public name!: string;
+  @global.State
+  public loader!: string;
 }
 </script>
 
@@ -37,6 +44,5 @@ export default class App extends Vue {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
