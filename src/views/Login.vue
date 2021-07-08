@@ -92,6 +92,9 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+// modules
+import { namespace } from "vuex-class";
+const auth = namespace("authModule");
 
 @Component({
   components: {},
@@ -114,7 +117,19 @@ export default class Login extends Vue {
 				},
 			]
 
-	public loginAction() {}
+	@auth.State
+	public test!: string;
+
+	mounted() {
+		// to check if module is connected
+		console.log(this.test);
+	}
+
+	// this is problem
+	loginAction() {
+		auth.loginAction(this.login);
+	}
+
 	public registerForm() {}
 	public registerAction() {}
 }

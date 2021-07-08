@@ -1,14 +1,33 @@
-import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-@Module({ namespaced: true, name: 'auth' })
-class Auth extends VuexModule {
-  public name: string = ''
-  @Mutation
-  public setName(newName: string): void {
-    this.name = newName
-  }
-  @Action
-  public updateName(newName: string): void {
-    this.context.commit('setName', newName)
-  }
+import { VuexModule, Module, Mutation, Action, MutationAction } from 'vuex-module-decorators';
+import { api } from '../../../api/api';
+@Module({ namespaced: true, name: 'authModule' })
+class authModule extends VuexModule {
+
+	public test: string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
+	get getTest() {
+		return this.test;
+	}
+
+
+	// @Mutation
+	// public setName(newName: string): void {
+	// 	this.name = newName
+	// }
+
+
+	// @MutationAction
+	// async updatePosts() {
+	// 	const posts = await api.get('https://jsonplaceholder.typicode.com/posts')
+	// 	return { posts }
+	// }
+
+	@MutationAction
+	async loginAction(payload: object) {
+		console.log('store');
+		const res = await api.get('');
+		return { test: {} };
+		//this.context.commit('setName', newName)
+	}
 }
-export default Auth
+export default authModule
