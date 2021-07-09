@@ -118,6 +118,12 @@ export default class Login extends Vue {
 
 	mounted() {}
 
+	// computed
+	get loggedUser() {
+		return authModule.loggedUser;
+	}
+	// END :: computed
+
 	async loginSubmit() {
 		authModule.loginAction(this.login).then(res => {
 			console.log(res);
