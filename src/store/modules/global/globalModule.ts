@@ -1,7 +1,8 @@
-import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import { api } from '../../../api/api';
+import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
+import store from '@/store'
+import { globalService } from './global.service'
 
-@Module({ namespaced: true, name: 'globalModule' })
+@Module({ namespaced: true, name: 'globalModule', dynamic: true, store })
 class GlobalModule extends VuexModule {
 
 	public name: string = 'Radiiiiiiiiii';
@@ -29,4 +30,4 @@ class GlobalModule extends VuexModule {
 		this.context.commit('toggleLoader', payload)
 	}
 }
-export default GlobalModule
+export default getModule(GlobalModule)

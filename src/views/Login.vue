@@ -118,12 +118,12 @@ export default class Login extends Vue {
 
 	mounted() {}
 
-	loginSubmit() {
-		// console.log(this.$store.getters['authModule/getTest'])
-		// this.$store.dispatch('authModule/testing')
-
-		// authModule.testing()
-		authModule.loginAction(this.login);
+	async loginSubmit() {
+		authModule.loginAction(this.login).then(res => {
+			console.log(res);
+		}).catch(err => {
+			console.log(err);
+		});
 	}
 
 	public registerForm() {}

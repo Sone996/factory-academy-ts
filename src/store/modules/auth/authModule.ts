@@ -1,6 +1,8 @@
 import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators'
-import { api } from '../../../api/api';
 import store from '@/store'
+import { authService } from './auth.service'
+// import { TOKEN_LS_NAME } from "../constants/constants";
+// import SHA512 from "crypto-js/sha512";
 
 @Module({ namespaced: true, name: 'authModule', dynamic: true, store })
 class AuthModule extends VuexModule {
@@ -14,10 +16,17 @@ class AuthModule extends VuexModule {
 	// actions
 	@Action({ rawError: true })
 	async loginAction(payload: {}) {
-		console.log('store');
-		console.log(payload)
-		//const res = await api.get('');
-		//return res;
+		try {
+			const res = await authService.login(payload);
+			console.log(res);
+			return Promise.resolve(res);
+		} catch (error) {
+			return Promise.reject(error);
+		}
+		// console.log('store');
+		// console.log(payload)
+		// const res = await api.get('');
+		// return res;
 	}
 	@Action({ rawError: true })
 	testing(): void {
