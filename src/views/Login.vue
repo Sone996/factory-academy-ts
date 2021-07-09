@@ -92,10 +92,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-// modules
-import { namespace } from "vuex-class";
-const auth = namespace("authModule");
-import store from '@/store';
+
+import authModule from '../store/modules/auth/authModule'
 
 @Component({
   components: {},
@@ -118,18 +116,14 @@ export default class Login extends Vue {
 				},
 			]
 
-	@auth.State
-	public test!: string;
+	mounted() {}
 
-  // @auth.Action
-  // public loginAction!: (login: {}) => Promise<boolean>
+	loginSubmit() {
+		// console.log(this.$store.getters['authModule/getTest'])
+		// this.$store.dispatch('authModule/testing')
 
-	mounted() {
-    // console.log(store)
-	}
-
-	async loginSubmit() {
-		// await this.loginAction(this.login).then().catch()
+		// authModule.testing()
+		authModule.loginAction(this.login);
 	}
 
 	public registerForm() {}

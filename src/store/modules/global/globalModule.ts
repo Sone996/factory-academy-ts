@@ -1,4 +1,6 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
+import { api } from '../../../api/api';
+
 @Module({ namespaced: true, name: 'globalModule' })
 class GlobalModule extends VuexModule {
 

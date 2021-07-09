@@ -1,23 +1,27 @@
-import { Module, VuexModule, getModule, Action } from 'vuex-module-decorators'
+import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators'
 import { api } from '../../../api/api';
 import store from '@/store'
 
-// this is undefined!!!!!
-console.log(store)
-@Module({ dynamic: true, store, name: 'authModule', namespaced: true })
+@Module({ namespaced: true, name: 'authModule', dynamic: true, store })
 class AuthModule extends VuexModule {
 	public test: string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaa';
 
-		get getTest() {
-			return this.test;
-		}
-	
-		@Action({rawError: true})
-		async loginAction(payload: {}) {
-			console.log('store');
-			//const res = await api.get('');
-			//return res;
-		}
+	// getters
+	get getTest() {
+		return this.test;
+	}
+
+	// actions
+	@Action({ rawError: true })
+	async loginAction(payload: {}) {
+		console.log('store');
+		console.log(payload)
+		//const res = await api.get('');
+		//return res;
+	}
+	@Action({ rawError: true })
+	testing(): void {
+		console.log('dddddd');
+	}
 }
-const myMod = getModule(AuthModule)
-export default myMod
+export default getModule(AuthModule)
