@@ -1,40 +1,42 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-//import { ROLES } from "../constants/constants";
-//import { routerService } from './router.service'
+import { ROLES } from "@/constants/constants";
+import { routerService } from './router.service'
 
 Vue.use(VueRouter);
+
+const ROLE: any = ROLES;
 
 const routes = [
 	{
 		path: "/",
 		component: () =>
 			import(/* webpackChunkName: "app-layout" */ "../layouts/AppLayout.vue"),
-		// children: [
-		// 	// user pages
-		// 	{
-		// 		path: "/home",
-		// 		name: "dashboard",
-		// 		// beforeEnter: routerService.routerGuards,
-		// 		// meta: {
-		// 		//   allowedRoles: [ROLES.student],
-		// 		// },
-		// 		component: () =>
-		// 			//import(/* webpackChunkName: "user-home" */ "@/views/userViews/UserHome"),
-		// 	},
-		// 	// END :: user pages
+		children: [
+			// user pages
+			{
+				path: "/student-home",
+				name: "student-home",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLE.student],
+				},
+				component: () =>
+					import(/* webpackChunkName: "student-home" */ "@/views/student/StudentHome.vue"),
+			},
+			// END :: user pages
 
-		// 	// professor pages
-		// 	{
-		// 		path: "/professor-home",
-		// 		name: "professor-dashboard",
-		// 		// beforeEnter: routerService.routerGuards,
-		// 		// meta: {
-		// 		//   allowedRoles: [ROLES.professor],
-		// 		// },
-		// 		component: () =>
-		// 			//import(/* webpackChunkName: "professor-home" */ "@/views/professorViews/ProfessorHome"),
-		// 	},
+			// professor pages
+			{
+				path: "/professor-home",
+				name: "professor-dashboard",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLE.professor],
+				},
+				component: () =>
+					import(/* webpackChunkName: "professor-home" */ "@/views/teacher/TeacherHome.vue"),
+			},
 		// 	{
 		// 		path: "/member-list",
 		// 		name: "member-list",
@@ -99,7 +101,7 @@ const routes = [
 		// 	},
 		// 	// END :: shared pages
 
-		// ],
+		],
 	},
 
 	{

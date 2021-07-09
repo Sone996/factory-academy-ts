@@ -1,7 +1,6 @@
 import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators'
 import store from '@/store'
 import { authService } from './auth.service'
-// import { TOKEN_LS_NAME } from "../constants/constants";
 import { TOKEN_LS_NAME } from "../../../constants/constants";
 import SHA512 from "crypto-js/sha512";
 
@@ -18,7 +17,7 @@ class AuthModule extends VuexModule {
 
 	// mutations
 	@Mutation
-	public setLoggedUser(loggedUser: {}): void {
+	public setLoggedUser(loggedUser: {} | null): void {
 		this.loggedUser = loggedUser
 	}
 	// END :: mutation
@@ -29,7 +28,6 @@ class AuthModule extends VuexModule {
 		try {
 			let formData: any = { ...payload };  // this should be changed, should not be any
 			formData.password = SHA512(formData.password).toString()
-			console.log(formData)
 			const res = await authService.login(formData);
 			this.setLoggedUser(res.data)
 			localStorage.setItem(TOKEN_LS_NAME, res.data['session-id']);
@@ -39,9 +37,39 @@ class AuthModule extends VuexModule {
 		}
 	}
 	@Action({ rawError: true })
-	testing(): void {
-		console.log('dddddd');
+	async logout() {
+		try {
+			const res = await authService.logout();
+			this.setLoggedUser(null);
+			return '/login';
+		} catch (error) {
+			return Promise.reject(error);
+		}
 	}
+
+	@Action({ rawError: true })
+	async fetchActiveAccount() {
+		try {
+			const res = await authService.fetchActiveAccount();
+			this.setLoggedUser(res.data)
+			return res;
+		} catch (error) {
+			return Promise.reject(error);
+		}
+	}
+
+	// @Action({ rawError: true })
+	// async register({}, payload) {
+	// 	try{
+	// 		let formData = { ...payload };
+	// 		formData.password = SHA512(formData.password).toString()
+	// 		const res = await authService.register(formData);
+	// 		return Promise.resolve(res);
+	// 	} catch(error) {
+	// 		return Promise.reject(error);
+	// 	}
+	// }
+
 	// END :: actions
 }
 export default getModule(AuthModule)

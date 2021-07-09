@@ -9,12 +9,12 @@ class AuthService {
     //     return authRepo.register(data);
     // }
 
-    // fetchActiveAccount() {
-    //     return authRepo.fetchActiveAccount();
-    // }
-    // logout() {
-    //     return authRepo.logout();
-    // }
+    fetchActiveAccount() {
+        return authRepo.fetchActiveAccount();
+    }
+    logout() {
+        return authRepo.logout();
+    }
 }
 
 export const authService = new AuthService();

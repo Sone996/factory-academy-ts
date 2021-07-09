@@ -126,7 +126,13 @@ export default class Login extends Vue {
 
 	async loginSubmit() {
 		authModule.loginAction(this.login).then(res => {
-			console.log(res);
+			if(res.data.role === 'teacher') {
+				this.$router.push('/professor-home');
+				return;
+			} if(res.data.role === 'student') {
+				this.$router.push('/student-home');
+				return;
+			}
 		}).catch(err => {
 			console.log(err);
 		});
