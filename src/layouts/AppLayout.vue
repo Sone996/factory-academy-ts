@@ -16,7 +16,7 @@ export default class AppLayout extends Vue {
     }
     //methods: {},
     public hello() {
-        console.log('yo yo');
+        //console.log('yo yo');
     }
 }
 </script>

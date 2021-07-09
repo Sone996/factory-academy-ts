@@ -23,7 +23,7 @@
         />
       </div>
       <div class="flex mt-4 justify-between">
-        <div class="button bg-blue-500 w-1/3" @click="loginAction()">Login</div>
+        <div class="button bg-blue-500 w-1/3" @click="loginSubmit()">Login</div>
         <div class="button bg-darkGreen w-1/3" @click="registerForm()">
           Register
         </div>
@@ -95,6 +95,7 @@ import { Component, Vue } from "vue-property-decorator";
 // modules
 import { namespace } from "vuex-class";
 const auth = namespace("authModule");
+import store from '@/store';
 
 @Component({
   components: {},
@@ -120,14 +121,15 @@ export default class Login extends Vue {
 	@auth.State
 	public test!: string;
 
+  // @auth.Action
+  // public loginAction!: (login: {}) => Promise<boolean>
+
 	mounted() {
-		// to check if module is connected
-		console.log(this.test);
+    // console.log(store)
 	}
 
-	// this is problem
-	loginAction() {
-		auth.loginAction(this.login);
+	async loginSubmit() {
+		// await this.loginAction(this.login).then().catch()
 	}
 
 	public registerForm() {}
