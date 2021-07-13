@@ -4,37 +4,48 @@
     <router-view />
     <!-- modals -->
     <!-- <span class="button bg-green" @click="openNotificationModal()">test</span> -->
-
-    <!-- <div v-if="showModal" class="fixed top-0 left-0 h-screen w-screen flex" style="z-index: 2">
+    <div v-if="showModal" class="fixed top-0 left-0 h-screen w-screen flex" style="z-index: 2">
 		<div class="modal flex items-center justify-center w-full">
 			<component :is="getModalObj.name" :model="getModalObj.data" @closeModal="closeModal" />
 		</div>
 		<div v-if="activeOverlay" class="fixed top-0 left-0 modal-overlay h-screen w-screen flex"></div>
-    </div> -->
+    </div>
 </div>
 </template>
 
 <script lang="ts">
-import {
-    Component,
-    Vue
-} from "vue-property-decorator";
-
+import { Component, Vue } from "vue-property-decorator";
 // modules
 import global from "./store/modules/global/globalModule";
-
 // components
 import Loader from "./components/shared/Loader.vue";
+// modals
+import notificationModal from './components/modals/NotificationModal.vue';
+
 
 @Component({
     components: {
         Loader,
+        notificationModal,
     },
 })
 export default class App extends Vue {
     mounted() {}
     get loader(): boolean {
         return global.getLoader;
+    }
+    get showModal(): boolean {
+        return global.getModal;
+    }
+    get activeOverlay(): boolean {
+        return global.getOverlay;
+    }
+    get getModalObj() {
+    	return global.modalData;
+    }
+
+    public closeModal(): void {
+        global.ModalClose(false);
     }
 }
 </script>

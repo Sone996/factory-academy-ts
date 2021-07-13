@@ -91,14 +91,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-
-import authModule from '../store/modules/auth/authModule'
+import { Component, Vue, Mixins } from "vue-property-decorator";
+import ModalMixin from '@/mixins/ModalMixin';
+import authModule from '../store/modules/auth/authModule';
 
 @Component({
   components: {},
 })
-export default class Login extends Vue {
+export default class Login extends ModalMixin {
 	private register = false;
 	private login: {} = {
 		email: null,
@@ -124,8 +124,19 @@ export default class Login extends Vue {
 	}
 	// END :: computed
 
+  public openNotificationModal(): any {
+    this.openModal('notification-modal', {
+					errMsg: null,
+					successMsg: 'lOGIN_SUCCESS',
+				});
+  }
+
 	async loginSubmit() {
 		authModule.loginAction(this.login).then(res => {
+      this.openModal('notification-modal', {
+					errMsg: null,
+					successMsg: 'lOGIN_SUCCESS',
+				});
 			if(res.data.role === 'teacher') {
 				this.$router.push('/professor-home');
 				return;

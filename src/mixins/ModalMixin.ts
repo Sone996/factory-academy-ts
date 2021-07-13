@@ -1,21 +1,17 @@
-// const ModalMixin = {
-//     computed: {
-//         getModalObj() {
-//             return this.$store.getters["appStore/getState"]('modalData');
-//         },
-//     },
-//     methods: {
-//         openModal(modalName, modalData) {
-//             this.$store.commit('appStore/setState', {
-//                 prop: 'showModal',
-//                 value: true
-//             });
-//             this.$store.commit('appStore/setModalData', {
-//                 modalName,
-//                 modalData
-//             });
-//         },
-//     }
-// };
+import store from '@/store'
 
-// export default ModalMixin;
+import { Component, Vue } from 'vue-property-decorator'
+@Component
+class ModalMixin extends Vue {
+    get getModalObj(): {} {
+        return store.getters["globalModule/getState"]('modalData');
+    }
+    openModal(modalName: string, modalData: {} | null) {
+        store.commit('globalModule/toggleModal', true);
+        store.commit('globalModule/setModalData', {
+            modalName,
+            modalData
+        });
+    }
+}
+export default ModalMixin
