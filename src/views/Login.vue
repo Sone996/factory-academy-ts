@@ -150,7 +150,6 @@ export default class Login extends ModalMixin {
 				return;
 			}
 		}).catch(err => {
-			console.log(err.response.data.error);
 			this.openModal('notification-modal', {
 					errMsg: notificationMsg(err, null),
 					successMsg: null,
