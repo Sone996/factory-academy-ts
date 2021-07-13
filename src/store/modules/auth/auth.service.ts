@@ -5,9 +5,9 @@ class AuthService {
         return authRepo.login(data);
     }
 
-    // register(data) {
-    //     return authRepo.register(data);
-    // }
+    register(data: {}) {
+        return authRepo.register(data);
+    }
 
     fetchActiveAccount() {
         return authRepo.fetchActiveAccount();

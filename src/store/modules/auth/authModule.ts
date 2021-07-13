@@ -3,6 +3,7 @@ import store from '@/store'
 import { authService } from './auth.service'
 import { TOKEN_LS_NAME } from "../../../constants/constants";
 import SHA512 from "crypto-js/sha512";
+import { Register } from '@/store/models'
 
 @Module({ namespaced: true, name: 'authModule', dynamic: true, store })
 class AuthModule extends VuexModule {
@@ -58,17 +59,17 @@ class AuthModule extends VuexModule {
 		}
 	}
 
-	// @Action({ rawError: true })
-	// async register({}, payload) {
-	// 	try{
-	// 		let formData = { ...payload };
-	// 		formData.password = SHA512(formData.password).toString()
-	// 		const res = await authService.register(formData);
-	// 		return Promise.resolve(res);
-	// 	} catch(error) {
-	// 		return Promise.reject(error);
-	// 	}
-	// }
+	@Action({ rawError: true })
+	async register(payload: Register) {
+		try{
+			let formData = { ...payload };
+			formData.password = SHA512(formData.password).toString()
+			const res = await authService.register(formData);
+			return Promise.resolve(res);
+		} catch(error) {
+			return Promise.reject(error);
+		}
+	}
 
 	// END :: actions
 }

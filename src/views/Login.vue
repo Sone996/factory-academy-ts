@@ -39,7 +39,7 @@
           class="input"
           type="text"
           autocomplete="off"
-          v-model="login.name"
+          v-model="registerData.name"
         />
       </div>
       <div class="flex flex-col justify-center mt-8">
@@ -48,7 +48,7 @@
           class="input"
           type="text"
           autocomplete="off"
-          v-model="login.surname"
+          v-model="registerData.surname"
         />
       </div>
       <div class="flex flex-col justify-center mt-8">
@@ -57,7 +57,7 @@
           class="input"
           type="text"
           autocomplete="off"
-          v-model="login.email"
+          v-model="registerData.email"
         />
       </div>
       <div class="flex flex-col justify-center mt-8">
@@ -66,7 +66,7 @@
           class="input"
           type="password"
           autocomplete="new-password"
-          v-model="login.password"
+          v-model="registerData.password"
         />
       </div>
       <div class="flex mt-8">
@@ -94,6 +94,8 @@
 import { Component, Vue, Mixins } from "vue-property-decorator";
 import ModalMixin from '@/mixins/ModalMixin';
 import authModule from '../store/modules/auth/authModule';
+import { Register } from '@/store/models';
+import { notificationMsg } from "@/services/BaseService";
 
 @Component({
   components: {},
@@ -104,7 +106,14 @@ export default class Login extends ModalMixin {
 		email: null,
 		password: null
 	}
-	private role = null
+	private registerData: Register = {
+		name: null,
+		surname: null,
+		email: null,
+		password: null,
+		role: null
+	}
+	private role: any = null
 	private roleOptions = [
 				{
 					name: "Teacher",
@@ -133,10 +142,6 @@ export default class Login extends ModalMixin {
 
 	async loginSubmit() {
 		authModule.loginAction(this.login).then(res => {
-      this.openModal('notification-modal', {
-					errMsg: null,
-					successMsg: 'lOGIN_SUCCESS',
-				});
 			if(res.data.role === 'teacher') {
 				this.$router.push('/professor-home');
 				return;
@@ -145,12 +150,38 @@ export default class Login extends ModalMixin {
 				return;
 			}
 		}).catch(err => {
-			console.log(err);
+			console.log(err.response.data.error);
+			this.openModal('notification-modal', {
+					errMsg: notificationMsg(err, null),
+					successMsg: null,
+				});
 		});
 	}
 
-	public registerForm() {}
-	public registerAction() {}
+	public registerForm() {
+    this.register = !this.register;
+  }
+	public registerAction() {
+    	this.registerData.role = this.role.value;
+		authModule.register(this.registerData).then(
+			res => {
+				this.login = {
+					email: this.registerData.email,
+					password: this.registerData.password
+				}
+				this.openModal('notification-modal', {
+					errMsg: null,
+					successMsg: notificationMsg(res, 'REGISTER_SUCCESS'),
+				});
+				this.loginSubmit();
+			}
+		).catch(err => {
+			this.openModal('notification-modal', {
+					errMsg: notificationMsg(err, null),
+					successMsg: null,
+				});
+		});
+  }
 }
 </script>
 

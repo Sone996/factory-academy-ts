@@ -3,6 +3,13 @@ export interface Login {
     password: string
 }
 
+export interface Register {
+    name: null,
+    surname: null,
+    email: null,
+    password: null,
+    role: null
+}
 export interface ModelData {
     name: string | null
     data?: {} | null

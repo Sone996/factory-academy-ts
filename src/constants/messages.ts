@@ -1,4 +1,4 @@
-export const ERROR_CODES = {
+export const ERROR_CODES: any = {
     ERR_BAD_COURSE_ID: 'Wrong course id',
     ERR_BAD_USER_ID: 'Wrong id',
     ERR_BAD_USER_ROLE: 'Wrong role',
@@ -20,7 +20,7 @@ export const ERROR_CODES = {
     ERR_STUDENT_ALREADY_ACCEPTED_TO_COURSE: 'Student already accepted to courses'
 };
 
-export const SUCCESS_CODES = {
+export const SUCCESS_CODES: any = {
     lOGIN_SUCCESS: 'Login success',
     REGISTER_SUCCESS: 'Register success',
     COURSE_CREATED_SUCCESS: 'Corse has been created',
