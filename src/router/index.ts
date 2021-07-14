@@ -37,16 +37,16 @@ const routes = [
 				component: () =>
 					import(/* webpackChunkName: "professor-home" */ "@/views/teacher/TeacherHome.vue"),
 			},
-		// 	{
-		// 		path: "/member-list",
-		// 		name: "member-list",
-		// 		// beforeEnter: routerService.routerGuards,
-		// 		// meta: {
-		// 		//   allowedRoles: [ROLES.professor],
-		// 		// },
-		// 		component: () =>
-		// 			//import(/* webpackChunkName: "member-list" */ "@/views/professorViews/MemberList"),
-		// 	},
+			{
+				path: "/member-list",
+				name: "member-list",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLE.professor],
+				},
+				component: () =>
+					import(/* webpackChunkName: "member-list" */ "@/views/teacher/MemberList.vue"),
+			},
 		// 	{
 		// 		path: "/new-course",
 		// 		name: "new-course",

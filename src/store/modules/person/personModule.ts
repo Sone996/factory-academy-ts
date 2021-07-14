@@ -8,6 +8,7 @@ class PersonModule extends VuexModule {
 	public myCourses: {} | null = null;
     public profileData: {} | null = null;
     public completedCourses: [] | {} | null = null;
+    public myStudents: [] | {} | null = null;
 
 	// getters
     get getMyCourses() {
@@ -35,6 +36,22 @@ class PersonModule extends VuexModule {
             }
         })
         this.myCourses = myCourses;
+    }
+
+    @Mutation
+    parseMyStudents(myStudents: [] | any): void {
+        if(!myStudents) {
+            return;
+        }
+        myStudents.forEach((student: {}, i: number) => {
+            myStudents[i] = {
+                user_id: myStudents[i].user_id,
+                user: myStudents[i].user,
+                course_name: myStudents[i].course_name,
+                course_start_date: myStudents[i].course_start_date
+            }
+        })
+        this.myStudents = myStudents;
     }
 
     @Mutation
@@ -70,6 +87,17 @@ class PersonModule extends VuexModule {
         try {
             const res = await personService.goProfile(payload);
             this.setProfileData(res.data);
+            return Promise.resolve(res);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    @Action({ rawError: true })
+    async fetchMyStudents() {
+        try {
+            const res = await personService.fetchMyStudents();
+            this.parseMyStudents(res.data);
             return Promise.resolve(res);
         } catch (error) {
             return Promise.reject(error);

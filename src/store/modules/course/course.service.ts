@@ -30,10 +30,6 @@ class CourseService {
     //     return adminRepo.fetchMyCourses(id);
     // }
 
-    // fetchMyStudents() {
-    //     return adminRepo.fetchMyStudents();
-    // }
-
     // fetchAplicationRequests() {
     //     return adminRepo.fetchAplicationRequests();
     // }

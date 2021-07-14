@@ -38,10 +38,6 @@ class CourseRepo {
     //     return api.get(URL);
     // }
 
-    // fetchMyStudents() {
-    //     return api.get(ROUTES.STUDENTS);
-    // }
-
     // fetchAplicationRequests() {
     //     const URL = `${ROUTES.TEACHER}${ROUTES.REQUEST_COURSE}`;
     //     return api.get(URL);

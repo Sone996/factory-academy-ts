@@ -29,6 +29,10 @@ class PersonRepo {
         const URL = `${ROUTES.TEACHER}/${id}${ROUTES.COURSES}`;
         return api.get(URL);
     }
+
+    fetchMyStudents() {
+        return api.get(ROUTES.STUDENTS);
+    }
 }
 
 export const personRepo = new PersonRepo();

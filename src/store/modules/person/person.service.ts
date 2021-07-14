@@ -16,6 +16,10 @@ class PersonService {
     fetchCompletedCourses(id: number) {
         return personRepo.fetchCompletedCourses(id);
     }
+
+    fetchMyStudents() {
+        return personRepo.fetchMyStudents();
+    }
 }
 
 export const personService = new PersonService();
