@@ -21,20 +21,17 @@
 </template>
 
 <script lang="ts">
-import {
-    Component,
-    Vue
-} from "vue-property-decorator";
-import {
-    TOKEN_LS_NAME
-} from "@/constants/constants";
+import { Component, Vue } from "vue-property-decorator";
+import { TOKEN_LS_NAME } from "@/constants/constants";
 // modules
 import authModule from '@/store/modules/auth/authModule';
+import personModule from '@/store/modules/person/personModule';
 
 @Component({
     components: {},
 })
 export default class AppLayout extends Vue {
+    
     mounted() {
         if (!localStorage.getItem(TOKEN_LS_NAME)) {
             this.$router.push('/login');
@@ -48,7 +45,7 @@ export default class AppLayout extends Vue {
     // END getters
 
     // methods
-    logout() {
+    public logout() {
         authModule.logout().then((res) => {
             localStorage.removeItem(TOKEN_LS_NAME);
             this.$router.push(res)
@@ -56,17 +53,16 @@ export default class AppLayout extends Vue {
             console.log(err);
         });
     }
-    goToHome() {
+    public goToHome() {
         if (this.loggedUser.role === 'teacher') {
             this.$router.push('professor-home');
         }
         if (this.loggedUser.role === 'student') {
-            this.$router.push('home');
+            this.$router.push('student-home');
         }
     }
-    goToProfile() {
-        this.$store.dispatch('userStore/goProfile', this.loggedUser.id)
-            .then(res => {
+    public goToProfile() {
+        personModule.goProfile(this.loggedUser.id).then(res => {
                 this.$router.push({
                     path: '/profile',
                     query: {
@@ -75,16 +71,16 @@ export default class AppLayout extends Vue {
                 })
             }).catch(err => {});
     }
-    newCourse() {
+    public newCourse() {
         this.$router.push('/new-course');
     }
-    myStudents() {
+    public myStudents() {
         this.$router.push('/member-list');
     }
-    CourseList() {
+    public CourseList() {
         this.$router.push('course-list')
     }
-    studentAplications() {
+    public studentAplications() {
         this.$router.push('student-aplications');
     }
     // END :: methods

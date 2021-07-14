@@ -79,16 +79,16 @@ const routes = [
 		// 		component: () =>
 		// 			//import(/* webpackChunkName: "course" */ "@/views/shared/SingleCourse"),
 		// 	},
-		// 	{
-		// 		path: "/profile",
-		// 		name: "profile",
-		// 		// beforeEnter: routerService.routerGuards,
-		// 		// meta: {
-		// 		//   allowedRoles: [ROLES.professor, ROLES.student],
-		// 		// },
-		// 		component: () =>
-		// 			//import(/* webpackChunkName: "profile" */ "@/views/shared/Profile"),
-		// 	},
+			{
+				path: "/profile",
+				name: "profile",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLE.professor, ROLE.student],
+				},
+				component: () =>
+					import(/* webpackChunkName: "profile" */ "@/views/shared/Profile.vue"),
+			},
 		// 	{
 		// 		path: "/course-list",
 		// 		name: "course-list",

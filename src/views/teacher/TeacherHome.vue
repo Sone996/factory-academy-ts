@@ -44,8 +44,8 @@ export default class ProfessorHome extends ModalMixin {
 	// END :: computed
 
 	// methods
-			public fetchMyCourses() {
-				personModule.fetchMyCourses(this.loggedUser.id).then(res => {
+		public fetchMyCourses() {
+			personModule.fetchMyCourses(this.loggedUser.id).then(res => {
 			})
 			.catch(err => {
 				this.openModal('notification-modal', {

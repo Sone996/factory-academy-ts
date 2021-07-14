@@ -91,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Mixins } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import ModalMixin from '@/mixins/ModalMixin';
 import authModule from '../store/modules/auth/authModule';
 import { Register } from '@/store/models';
