@@ -15,6 +15,11 @@ export interface ModelData {
     data?: {} | null
 }
 
+export interface BuyCourse {
+    id: number | null,
+    comment: string | null
+}
+
 // export interface Profile {
 //     username: string;
 //     bio?: string;
