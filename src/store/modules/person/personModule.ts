@@ -183,6 +183,26 @@ class PersonModule extends VuexModule {
             return Promise.reject(error);
         }
     }
+
+    @Action({ rawError: true })
+    async fetchNotRatedCourses(payload: number) {
+        try {
+            const res = personService.fetchNotRatedCourses(payload);
+            return Promise.resolve(res);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    @Action({ rawError: true })
+    async completeCourse(payload: {}) {
+        try {
+            const res = personService.completeCourse(payload);
+            return Promise.resolve(res);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
 	// END :: actions
 }
 export default getModule(PersonModule)

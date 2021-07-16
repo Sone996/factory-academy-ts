@@ -23,6 +23,7 @@ import Loader from "./components/shared/Loader.vue";
 import notificationModal from './components/modals/NotificationModal.vue';
 import requrestAcceptModal from './components/modals/RequestAcceptModal.vue';
 import finishingCourseModal from './components/modals/FinishingCourseModal.vue';
+import rateCourseModal from './components/modals/RateCourse.vue';
 
 
 @Component({
@@ -31,6 +32,7 @@ import finishingCourseModal from './components/modals/FinishingCourseModal.vue';
         notificationModal,
         finishingCourseModal,
         requrestAcceptModal,
+        rateCourseModal,
     },
 })
 export default class App extends Vue {

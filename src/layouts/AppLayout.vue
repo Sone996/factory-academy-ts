@@ -23,6 +23,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { TOKEN_LS_NAME } from "@/constants/constants";
+import ModalMixin from '@/mixins/ModalMixin';
+
 // modules
 import authModule from '@/store/modules/auth/authModule';
 import personModule from '@/store/modules/person/personModule';
@@ -30,11 +32,14 @@ import personModule from '@/store/modules/person/personModule';
 @Component({
     components: {},
 })
-export default class AppLayout extends Vue {
+export default class AppLayout extends ModalMixin {
     
     mounted() {
         if (!localStorage.getItem(TOKEN_LS_NAME)) {
             this.$router.push('/login');
+        }
+        if(this.loggedUser.role === 'student') {
+            this.notRated();
         }
     }
 
@@ -45,6 +50,11 @@ export default class AppLayout extends Vue {
     // END getters
 
     // methods
+    private notRated() {
+		personModule.fetchNotRatedCourses(this.loggedUser.id).then(res => {
+            Object.keys(res.data).length > 0 ? this.openModal('rate-course-modal', res.data) : null;
+        }).catch();
+	}
     public logout() {
         authModule.logout().then((res) => {
             localStorage.removeItem(TOKEN_LS_NAME);

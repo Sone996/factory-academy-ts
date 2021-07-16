@@ -12,6 +12,12 @@ export default class HelloWorld extends Vue {
 	//public data = null;
 	// END :: data
 
+	// props
+	// END :: props
+
+	// mounted
+	// END :: mounted
+
 	// computed
 	// get smth() {
 		// return moduleName.dataName;

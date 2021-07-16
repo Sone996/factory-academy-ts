@@ -31,6 +31,17 @@ class PersonService {
             data: omit(data, ['course_id']) 
         });
     }
+
+    fetchNotRatedCourses(data: number) {
+        return personRepo.fetchNotRatedCourses(data);
+    }
+
+    completeCourse(data: any) {
+        return personRepo.completeCourse({
+            personId: data.personId,
+            data: omit(data, ['personId'])
+        });
+    }
 }
 
 export const personService = new PersonService();

@@ -24,5 +24,6 @@ export const SUCCESS_CODES: any = {
     lOGIN_SUCCESS: 'Login success',
     REGISTER_SUCCESS: 'Register success',
     COURSE_CREATED_SUCCESS: 'Corse has been created',
-    COURSE_APPLYED_SUCCESS: 'Successfuly applyed for course'
+    COURSE_APPLYED_SUCCESS: 'Successfuly applyed for course',
+    COURSE_RATED_SUCCESS: 'Course has been rated',
 };

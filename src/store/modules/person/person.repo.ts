@@ -8,6 +8,7 @@ const ROUTES = {
     REQUEST_COURSE: '/request_course',
     USERS: '/users',
     COMPLETE_COURSE: '/complete_course',
+    RATE_COURSE: '/rate_course',
 };
 
 class PersonRepo {
@@ -41,6 +42,16 @@ class PersonRepo {
 
     resolveRequest(data: any) {
         const URL = `${ROUTES.TEACHER}${ROUTES.REQUEST_COURSE}/${data.courseId}`;
+        return api.post(URL, data.data);
+    }
+
+    fetchNotRatedCourses(data: number) {
+        const URL = `${ROUTES.STUDENT}/${data}${ROUTES.RATE_COURSE}`
+        return api.get(URL);
+    }
+
+    completeCourse(data: any) {
+        const URL = `${ROUTES.STUDENT}/${data.personId}${ROUTES.RATE_COURSE}`;
         return api.post(URL, data.data);
     }
 }
