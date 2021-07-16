@@ -10,10 +10,14 @@ class PersonModule extends VuexModule {
     public completedCourses: [] | {} | null = null;
     public myStudents: [] | {} | null = null;
     public aplicationRequests: [] | {} | null = null;
+    public notCompletedCourses: [] | {} | null = null;
 
 	// getters
     get getMyCourses() {
         return this.myCourses;
+    }
+    get getNotCompletedCourses() {
+        return this.notCompletedCourses;
     }
 	// END :: getters
 
@@ -84,6 +88,23 @@ class PersonModule extends VuexModule {
         });
         this.aplicationRequests = aplicationRequests;
     }
+
+    @Mutation
+    public parsenotCompletedCourses(notCompletedCourses: [] | any): void  {
+        if(!notCompletedCourses) {
+            return;
+        }
+        notCompletedCourses.forEach((course: {}, i: number) => {
+            notCompletedCourses[i] = {
+                course_id: notCompletedCourses[i].course_id,
+                course_name: notCompletedCourses[i].course_name,
+                teacher_name: notCompletedCourses[i].teacher_name,
+                average_mark: notCompletedCourses[i].average_mark,
+                price: notCompletedCourses[i].price
+            }
+        })
+        this.notCompletedCourses = notCompletedCourses;
+    }
 	// END :: mutation
 
 	// actions
@@ -120,16 +141,16 @@ class PersonModule extends VuexModule {
         }
     }
 
-    // @Action({ rawError: true })
-    // async fetchNotCompletedCourses() {
-    //     try {
-    //         const res = await personService.fetchNotCompletedCourses();
-    //         commit('parsenotCompletedCourses', res.data)
-    //         return Promise.resolve(res);
-    //     } catch (error) {
-    //         return Promise.reject(error);
-    //     }
-    // }
+    @Action({ rawError: true })
+    async fetchNotCompletedCourses() {
+        try {
+            const res = await personService.fetchNotCompletedCourses();
+            this.parsenotCompletedCourses(res.data);
+            return Promise.resolve(res);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
 
     @Action({ rawError: true })
     async fetchCompletedCourses(id: number) {
