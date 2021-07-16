@@ -1,5 +1,5 @@
 import { personRepo } from "./person.repo";
-
+import omit from "lodash/omit";
 class PersonService {
     fetchMyCourses(data: number) {
         return personRepo.fetchMyCourses(data);
@@ -19,6 +19,17 @@ class PersonService {
 
     fetchMyStudents() {
         return personRepo.fetchMyStudents();
+    }
+
+    fetchAplicationRequests() {
+        return personRepo.fetchAplicationRequests();
+    }
+
+    resolveRequest(data: any) {
+        return personRepo.resolveRequest({
+            courseId: data.course_id,
+            data: omit(data, ['course_id']) 
+        });
     }
 }
 

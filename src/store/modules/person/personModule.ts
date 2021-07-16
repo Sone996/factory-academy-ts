@@ -9,6 +9,7 @@ class PersonModule extends VuexModule {
     public profileData: {} | null = null;
     public completedCourses: [] | {} | null = null;
     public myStudents: [] | {} | null = null;
+    public aplicationRequests: [] | {} | null = null;
 
 	// getters
     get getMyCourses() {
@@ -68,6 +69,21 @@ class PersonModule extends VuexModule {
         })
         this.completedCourses = completedCourses;
     }
+
+    @Mutation
+    public parseAplicationRequests(aplicationRequests: [] | any): void {
+        if(!aplicationRequests) {
+            return;
+        }
+        aplicationRequests.forEach((aplication: {}, i: number) => {
+            aplicationRequests[i] = {
+                student_id: aplicationRequests[i].student_id,
+                course_id: aplicationRequests[i].course_id,
+                accepted: aplicationRequests[i].accepted,
+            }
+        });
+        this.aplicationRequests = aplicationRequests;
+    }
 	// END :: mutation
 
 	// actions
@@ -120,6 +136,27 @@ class PersonModule extends VuexModule {
         try {
             const res = await personService.fetchCompletedCourses(id);
             this.parseCompletedCourses(res.data);
+            return Promise.resolve(res);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    @Action({ rawError: true })
+    async fetchAplicationRequests() {
+        try {
+            const res = await personService.fetchAplicationRequests();
+            this.parseAplicationRequests(res.data);
+            return Promise.resolve(res);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    @Action({ rawError: true })
+    async resolveRequest(payload: any) {
+        try {
+            const res = personService.resolveRequest(payload);
             return Promise.resolve(res);
         } catch (error) {
             return Promise.reject(error);

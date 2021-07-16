@@ -6,7 +6,8 @@ import { courseService } from './course.service'
 class CourseModule extends VuexModule {
 
 	public singleCourse: {} | null = null;
-    public studentsOnCourseList: {} | [] | null = null
+    public studentsOnCourseList: {} | [] | null = null;
+    public allCouresList: {} | [] | null = null;
 
 	// getters
 	// END :: getters
@@ -32,10 +33,26 @@ class CourseModule extends VuexModule {
         })
         this.studentsOnCourseList = studentsOnCourseList;
     }
+
+    @Mutation
+    parseAllCourses(allCouresList: any): void {
+        if(!allCouresList) {
+            return;
+        }
+        allCouresList.forEach((student: {}, i: number) => {
+            allCouresList[i] = {
+               id: allCouresList[i].id,
+               name: allCouresList[i].name,
+               average_mark: allCouresList[i].average_mark,
+               price: allCouresList[i].price
+           }
+        });
+        this.allCouresList = allCouresList;
+    }
 	// END :: mutation
 
 	// actions
-    @Action
+    @Action({ rawError: true })
     async fetchSingleCours(payload: number) {
         try{
             const res = await courseService.fetchSingleCours(payload);
@@ -46,7 +63,7 @@ class CourseModule extends VuexModule {
         }
     }
 
-    @Action
+    @Action({ rawError: true })
     async studentsOnCourse(payload: any) {
         try{
             const res = await courseService.studentsOnCourse(payload);
@@ -57,11 +74,43 @@ class CourseModule extends VuexModule {
         }
     }
 
-    @Action
+    @Action({ rawError: true })
     async buyCourse(payload: {}) {
         try {
             const res = await courseService.buyCourse(payload);
             return Promise.resolve(res);	
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    @Action({ rawError: true })
+    async createCourse(payload: {}) {
+        try{
+            const res = await courseService.createCourse(payload);
+            return Promise.resolve(res);
+
+        } catch(error){
+            return Promise.reject(error);
+        }
+    }
+
+    @Action({ rawError: true })
+    async fetchAllCourses() {
+        try{
+            const res = await courseService.fetchAllCourses();
+            this.parseAllCourses(res.data);
+            return Promise.resolve(res);
+        } catch(error) {
+            return Promise.reject(error);
+        }
+    }
+
+    @Action({ rawError: true })
+    async completeCourse(payload: {}) {
+        try {
+            const res = courseService.completeCourse(payload);
+            return Promise.resolve(res);
         } catch (error) {
             return Promise.reject(error);
         }

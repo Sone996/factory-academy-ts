@@ -47,26 +47,26 @@ const routes = [
 				component: () =>
 					import(/* webpackChunkName: "member-list" */ "@/views/teacher/MemberList.vue"),
 			},
-		// 	{
-		// 		path: "/new-course",
-		// 		name: "new-course",
-		// 		// beforeEnter: routerService.routerGuards,
-		// 		// meta: {
-		// 		//   allowedRoles: [ROLES.professor],
-		// 		// },
-		// 		component: () =>
-		// 			//import(/* webpackChunkName: "new-course" */ "@/views/professorViews/NewCourse"),
-		// 	},
-		// 	{
-		// 		path: "/student-aplications",
-		// 		name: "student-aplications",
-		// 		// beforeEnter: routerService.routerGuards,
-		// 		// meta: {
-		// 		//   allowedRoles: [ROLES.professor],
-		// 		// },
-		// 		component: () =>
-		// 			//import(/* webpackChunkName: "student-aplications" */ "@/views/professorViews/StudentAplications"),
-		// 	},
+			{
+				path: "/new-course",
+				name: "new-course",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLE.professor],
+				},
+				component: () =>
+					import(/* webpackChunkName: "new-course" */ "@/views/teacher/NewCourse.vue"),
+			},
+			{
+				path: "/student-aplications",
+				name: "student-aplications",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLE.professor],
+				},
+				component: () =>
+					import(/* webpackChunkName: "student-aplications" */ "@/views/teacher/StudentAplications.vue"),
+			},
 		// 	// END :: professor pages
 		// 	// shared pages
 			{
@@ -89,16 +89,16 @@ const routes = [
 				component: () =>
 					import(/* webpackChunkName: "profile" */ "@/views/shared/Profile.vue"),
 			},
-		// 	{
-		// 		path: "/course-list",
-		// 		name: "course-list",
-		// 		// beforeEnter: routerService.routerGuards,
-		// 		// meta: {
-		// 		//   allowedRoles: [ROLES.professor],
-		// 		// },
-		// 		component: () =>
-		// 			//import(/* webpackChunkName: "courseList" */ "@/views/shared/CourseList"),
-		// 	},
+			{
+				path: "/course-list",
+				name: "course-list",
+				beforeEnter: routerService.routerGuards,
+				meta: {
+				  allowedRoles: [ROLE.professor],
+				},
+				component: () =>
+					import(/* webpackChunkName: "courseList" */ "@/views/shared/CourseList.vue"),
+			},
 		// 	// END :: shared pages
 
 		],

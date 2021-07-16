@@ -20,6 +20,24 @@ export interface BuyCourse {
     comment: string | null
 }
 
+export interface NewCourseModel {
+    name: null,
+	price: null,
+	description?: null,
+}
+
+export interface FinishCourseModel {
+    courseId: null,
+    userId: null,
+    teacherId: null,
+    complete: boolean
+}
+
+export interface RequestAcceptForm {
+    course_id: null,
+    accepted: null | boolean
+}
+
 // export interface Profile {
 //     username: string;
 //     bio?: string;

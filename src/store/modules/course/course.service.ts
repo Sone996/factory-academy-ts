@@ -14,41 +14,30 @@ class CourseService {
         });
     }
 
-    // createCourse(data) {
-    //     return adminRepo.createCourse(data);
-    // }
+    createCourse(data: {}) {
+        return courseRepo.createCourse(data);
+    }
     
     fetchSingleCours(data: number) {
         return courseRepo.fetchSingleCours(data);
     }
 
-    // fetchAllCourses() {
-    //     return adminRepo.fetchAllCourses();
-    // }
+    fetchAllCourses() {
+        return courseRepo.fetchAllCourses();
+    }
 
     // fetchMyCourses(id) {
     //     return adminRepo.fetchMyCourses(id);
     // }
 
-    // fetchAplicationRequests() {
-    //     return adminRepo.fetchAplicationRequests();
-    // }
-
-    // resolveRequest(data) {
-    //     return adminRepo.resolveRequest({
-    //         courseId: data.course_id,
-    //         data: omit(data, ['course_id']) 
-    //     });
-    // }
-
-    // completeCourse(data) {
-    //     return adminRepo.completeCourse({
-    //         courseId: data.courseId,
-    //         teacherId: data.teacherId,
-    //         userId: data.userId,
-    //         data: omit(data, ['courseId', 'teacherId', 'userId'])
-    //     });
-    // }
+    completeCourse(data: any) {
+        return courseRepo.completeCourse({
+            courseId: data.courseId,
+            teacherId: data.teacherId,
+            userId: data.userId,
+            data: omit(data, ['courseId', 'teacherId', 'userId'])
+        });
+    }
 }
 
 export const courseService = new CourseService();

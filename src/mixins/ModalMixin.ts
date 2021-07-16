@@ -12,6 +12,7 @@ class ModalMixin extends Vue {
             modalName,
             modalData
         });
+        store.commit('globalModule/setOverlay', true);
     }
 }
 export default ModalMixin
