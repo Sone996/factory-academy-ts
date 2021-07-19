@@ -6,9 +6,9 @@
 			</div>
 			<div class="flex flex-col justify-center h-full p-16">
 				<div class="relative h-full w-full">
-					<!-- <Scroll> -->
+					<Scroll>
 					    <simple-table :model='courses' :titles='titles'></simple-table>
-            		<!-- </Scroll> -->
+            		</Scroll>
 				</div>
 			</div>
 		</div>

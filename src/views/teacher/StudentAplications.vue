@@ -10,9 +10,9 @@
 
 		<div class="flex flex-col justify-center h-full p-16">
 			<div class="relative h-full w-full">
-				<!-- <scroll> -->
+				<scroll>
 				    <simple-table @singleView="singleView" :model='model' :titles='titles'></simple-table>
-        		<!-- </scroll> -->
+        		</scroll>
 			</div>
 		</div>
 

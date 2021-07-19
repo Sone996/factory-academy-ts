@@ -5,9 +5,9 @@
 		</div>
 		<div class="flex w-full h-full py-16 pl-5">
             <div class="relative h-full w-3/4">
-                <!-- <Scroll> -->
+                <Scroll>
 			        <simple-table @singleView="singleView" :model='courses' :titles='titles'></simple-table>
-                <!-- </Scroll> -->
+                </Scroll>
             </div>
 		</div>
 	</div>

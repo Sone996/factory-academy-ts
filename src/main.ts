@@ -10,9 +10,10 @@ import './assets/scss/main.scss'
 Vue.config.productionTip = false
 
 // vue select and scroll
-Object.keys(globaComponents.components).forEach((key: string) => {
+Object.keys(globaComponents.components).forEach((key: any) => {
 	// Vue.component(key, globaComponents.components[key]);
 	Vue.component(key, globaComponents.components.vSelect);
+	Vue.component(key, globaComponents.components.Scroll);
 });
 
 new Vue({
